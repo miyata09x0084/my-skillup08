@@ -10,7 +10,7 @@ let cloudGeo, cloudMaterial, cloudParticles = [];
 
 function init() {
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 1, 1000);
+  camera = new THREE.PerspectiveCamera(55, window.innerWidth/window.innerHeight, 1, 1000);
   camera.position.z = 1;
   camera.rotation.x = 1.16;
   camera.rotation.y = -0.12;
@@ -23,13 +23,13 @@ function init() {
   directionalLight.position.set(0, 0, 1);
   scene.add(directionalLight);
 
-  let orangeLight = new THREE.PointLight("#ffff7d", 50, 450, 1.9);
+  let orangeLight = new THREE.PointLight("#ffff7d", 50, 450, 1.64);
   orangeLight.position.set(200, 300, 100);
   scene.add(orangeLight);
-  let redLight = new THREE.PointLight("#ff9831", 50, 450, 1.9);
+  let redLight = new THREE.PointLight("#ff9831", 50, 450, 1.64);
   redLight.position.set(100, 300, 100);
   scene.add(redLight);
-  let blueLight = new THREE.PointLight("#98ff31", 50, 450, 1.9);
+  let blueLight = new THREE.PointLight("#98ff31", 50, 450, 1.64);
   blueLight.position.set(300, 300, 200);
   scene.add(blueLight);
 
@@ -47,17 +47,17 @@ function init() {
       transparent: true
     });
 
-    for(let p=0; p<20; p++) {
+    for(let p=0; p<17; p++) {
       let cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
       cloud.position.set(
         Math.random()*800-400,
-        450,
+        500,
         Math.random()*500-500
       );
 
       cloud.rotation.x = 1.16;
       cloud.rotation.y = -0.12;
-      cloud.rotation.z = Math.random()*2*Math.PI;
+      cloud.rotation.z = Math.random()*50*Math.PI;
       cloud.material.opacity = 0.55;
       cloudParticles.push(cloud);
       scene.add(cloud);
@@ -87,7 +87,7 @@ function init() {
 
 function render() {
   cloudParticles.forEach(p => {
-    p.rotation.z -= 0.001;
+    p.rotation.z -= 0.0011;
   });
   renderer.render(scene, camera);
   requestAnimationFrame(render);
